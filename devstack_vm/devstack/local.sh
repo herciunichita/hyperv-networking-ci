@@ -8,7 +8,7 @@ echo "Before updating nova flavors:"
 nova flavor-list
 
 nova flavor-delete 42
-nova flavor-create m1.nano 42 96 1 1
+nova flavor-create m1.nano 42 128 1 1
 
 nova flavor-delete 84
 nova flavor-create m1.micro 84 128 2 1
@@ -37,9 +37,10 @@ iniset $TEMPEST_CONFIG compute-feature-enabled rdp_console true
 iniset $TEMPEST_CONFIG compute-feature-enabled block_migrate_cinder_iscsi True
 iniset $TEMPEST_CONFIG compute-feature-enabled block_migration_for_live_migration True
 iniset $TEMPEST_CONFIG compute-feature-enabled live_migration True
+iniset $TEMPEST_CONFIG compute-feature-enabled interface_attach False
 
 iniset $TEMPEST_CONFIG scenario img_dir "/home/ubuntu/devstack/files/images/"
-iniset $TEMPEST_CONFIG scenario img_file "cirros-0.3.3-x86_64.vhdx"
+iniset $TEMPEST_CONFIG scenario img_file "cirros-0.3.4-x86_64.vhdx"
 iniset $TEMPEST_CONFIG scenario img_disk_format vhd
 
 IMAGE_REF=`iniget $TEMPEST_CONFIG compute image_ref`

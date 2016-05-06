@@ -1,17 +1,7 @@
 #!/bin/bash
 
-project=${1:-"openstack/networking-hyperv"}
-tests_dir=${2:-"/opt/stack/tempest"}
-parallel_tests=${3:-8}
-max_attempts=${4:-3}
-test_suite=${5:-"default"}
-log_file=${6:-"/home/ubuntu/tempest/subunit-output.log"}
-results_html_file=${7:-"/home/ubuntu/tempest/results.html"}
-tempest_output_file="/home/ubuntu/tempest/tempest-output.log"
-subunit_stats_file="/home/ubuntu/tempest/subunit_stats.log"
-TEMPEST_DIR="/home/ubuntu/tempest"
-
-basedir="/home/ubuntu/bin"
+basedir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+. $basedir/config.sh
 
 project_name=$(basename $project)
 
@@ -21,10 +11,10 @@ pushd $basedir
 
 . $basedir/utils.sh
 
-echo "Activating virtual env."
-set +u
-source $tests_dir/.tox/full/bin/activate
-set -u
+#echo "Activating virtual env."
+#set +u
+#source $tests_dir/.tox/full/bin/activate
+#set -u
 
 tests_file=$(tempfile)
 $basedir/get-tests.sh $tests_dir  > $tests_file

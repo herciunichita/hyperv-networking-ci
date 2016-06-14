@@ -11,6 +11,7 @@ set -x
 set -e
 #sudo ifconfig eth0 promisc up
 sudo ifconfig eth1 promisc up
+sudo dhclient -v eth1
 
 HOSTNAME=$(hostname)
 
@@ -63,7 +64,9 @@ screen_pid=$(ps auxw | grep -i screen | grep -v grep | awk '{print $2}')
 if [[ -n $screen_pid ]] 
 then
     kill -9 $screen_pid
-    #In case there are "DEAD ????" screens, we remove them
+fi
+
+if `screen -ls | grep "Dead"`; then
     screen -wipe
 fi
 
